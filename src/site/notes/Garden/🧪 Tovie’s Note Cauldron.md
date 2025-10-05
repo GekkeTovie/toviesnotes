@@ -2,6 +2,7 @@
 {"dg-publish":true,"dg-permalink":"/","permalink":"/","title":"🧪 Tovie’s Note Cauldron","tags":["gardenEntry"]}
 ---
 
+
 # 🧪 Tovie’s Note Cauldron
 
 _Where code incantations, game lore, OS alchemy (Arch/Omarchy), and rogue side-projects bubble together._  
