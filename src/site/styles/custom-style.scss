@@ -3,20 +3,14 @@
    Drop-in SCSS for src/site/styles/custom-style.scss
    ------------------------------------------------- */
 
-/* TEMP debug – remove after verifying */
-body::after {
-  content: 'DG-USER-SCSS LOADED';
-  position: fixed; right: .5rem; bottom: .5rem; z-index: 99999;
-  padding: .25rem .5rem; font: 12px/1.2 ui-monospace, monospace;
-  background: #001a; color: #00ffd5; border: 1px solid #00ffd5;
-}
+
 
 /* ===== Global defaults (Matrix palette) ===== */
 :root {
   --accent: #39ff14;        /* neon green */
   --accent-2: #00ffd5;      /* aqua/cyan */
-  --bg-1: #020604;          /* deep near-black with green tint */
-  --bg-2: #000000;          /* pure black */
+  --bg-1: #1B2124;          /* deep near-black with green tint */
+  --bg-2: #1B2124;          /* pure black */
   --card-bg: #0a0f0c;       /* subtle greenish card */
   --text-color: #d7ffe8;    /* soft mint text */
 
