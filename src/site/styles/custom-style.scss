@@ -11,7 +11,7 @@
   --accent-2: #00ffd5;      /* aqua/cyan */
   --bg-1: #1B2124;          /* deep near-black with green tint */
   --bg-2: #1B2124;          /* pure black */
-  --card-bg: #0a0f0c;       /* subtle greenish card */
+  --card-bg: #1B2124;       /* subtle greenish card */
   --text-color: #d7ffe8;    /* soft mint text */
 
   --font-body: JetBrainsMonoNL, ui-monospace, Menlo, Consolas, "Liberation Mono", monospace;
@@ -179,9 +179,9 @@ body.matrix-preset {
   /* re-assert palette on body if you like toggling presets later */
   --accent: #39ff14;
   --accent-2: #00ffd5;
-  --bg-1: #020604;
-  --bg-2: #000;
-  --card-bg: #0a0f0c;
+  --bg-1: #1B2124;
+  --bg-2: #1B2124;
+  --card-bg: #1B2124;
   --text-color: #d7ffe8;
 
   background: linear-gradient(180deg, var(--bg-1), var(--bg-2)) !important;
