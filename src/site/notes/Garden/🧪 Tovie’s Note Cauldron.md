@@ -60,7 +60,7 @@ I keep everything I learn (or break) about:
     
 - Nvidia on Wayland: rituals, runes, regrets.
     
-- Eww widgets, systemd units, and pacman runebooks.
+- Eww widgets, systemd units, swaync and pacman runebooks.
     
 
 ### 🔧 Project Lab
