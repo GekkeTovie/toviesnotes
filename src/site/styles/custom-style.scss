@@ -6,9 +6,15 @@
 /* TEMP debug – remove after verifying */
 // body::after {
 //   content: 'DG-USER-SCSS LOADED';
-//   position: fixed; right: .5rem; bottom: .5rem; z-index: 99999;
-//   padding: .25rem .5rem; font: 12px/1.2 ui-monospace, monospace;
-//   background: #001a; color: #00ffd5; border: 1px solid #00ffd5;
+//   position: fixed;
+//   right: .5rem;
+//   bottom: .5rem;
+//   z-index: 99999;
+//   padding: .25rem .5rem;
+//   font: 12px/1.2 ui-monospace, monospace;
+//   background: #001a;
+//   color: #00ffd5;
+//   border: 1px solid #00ffd5;
 // }
 
 /* ===== Global defaults (Matrix palette) ===== */
@@ -27,10 +33,10 @@
   --blur: 8px;
   --spacing: 12px;
 
-//   /* Overlay defaults */
-//   --matrix-density: .18;
-//   --matrix-speed: 40s;
-// }
+  // /* Overlay defaults */
+  // --matrix-density: .18;
+  // --matrix-speed: 40s;
+}
 
 /* If DG “Apply Style Settings” wrote vars on body, map them in (still Matrix by default) */
 body.css-settings-manager {
@@ -64,37 +70,55 @@ $tovie-scope: 'body.tovie-cauldron, main.tovie-cauldron, article.tovie-cauldron,
     radial-gradient(1200px 800px at 20% -10%, color-mix(in hsl, var(--accent) 12%, transparent), transparent 60%),
     radial-gradient(1000px 700px at 110% 10%, color-mix(in hsl, var(--accent-2) 10%, transparent), transparent 65%),
     linear-gradient(180deg, var(--bg-1), var(--bg-2)) !important;
+  background-color: var(--bg-1) !important;
 
-  .markdown-preview-sizer { max-width: var(--max-width); }
+  .markdown-preview-sizer {
+    max-width: var(--max-width);
+  }
 
-    background-color: var(--bg-1) !important;
-
-
-  h1, h2, h3 {
+  h1,
+  h2,
+  h3 {
     letter-spacing: .015em;
     line-height: 1.15;
     margin-block: calc(var(--spacing) * 1.2) calc(var(--spacing) * .4);
   }
+
   h1 {
     font-size: clamp(2rem, 4vw, 2.8rem);
     text-shadow: 0 0 calc(6px * var(--glow)) color-mix(in hsl, var(--accent) 70%, transparent);
   }
-  h2 { color: var(--accent); }
-  h3 { color: color-mix(in hsl, var(--accent-2) 85%, var(--text-color)); }
+
+  h2 {
+    color: var(--accent);
+  }
+
+  h3 {
+    color: color-mix(in hsl, var(--accent-2) 85%, var(--text-color));
+  }
 
   a {
     color: var(--accent-2);
     text-decoration: none;
     border-bottom: 1px dashed color-mix(in hsl, var(--accent-2) 55%, transparent);
-    &:hover { text-decoration: underline; }
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   pre {
     border-left: 3px solid color-mix(in hsl, var(--accent) 55%, transparent);
-    code { text-shadow: none !important; }
+
+    code {
+      text-shadow: none !important;
+    }
   }
 
-  ul li::marker { content: "• "; color: var(--accent); }
+  ul li::marker {
+    content: "• ";
+    color: var(--accent);
+  }
 
   blockquote {
     border-left: 4px solid color-mix(in hsl, var(--accent) 55%, transparent);
@@ -106,7 +130,10 @@ $tovie-scope: 'body.tovie-cauldron, main.tovie-cauldron, article.tovie-cauldron,
 /* ===== Soft cards in Matrix tint (optional toggle) ===== */
 body.tovie-soft-cards {
   #{$tovie-scope} {
-    p, ul, blockquote, pre {
+    p,
+    ul,
+    blockquote,
+    pre {
       background: color-mix(in hsl, var(--card-bg) 92%, transparent);
       border: 1px solid color-mix(in hsl, var(--accent) 22%, transparent);
       border-radius: var(--radius);
@@ -121,7 +148,9 @@ body.tovie-soft-cards {
 /* ===== Text glow in Matrix (optional toggle) ===== */
 body.tovie-text-glow {
   #{$tovie-scope} {
-    h1, h2, a {
+    h1,
+    h2,
+    a {
       text-shadow:
         0 0 calc(8px * var(--glow)) color-mix(in hsl, var(--accent) 60%, transparent),
         0 0 calc(14px * var(--glow)) color-mix(in hsl, var(--accent-2) 45%, transparent);
@@ -129,41 +158,14 @@ body.tovie-text-glow {
   }
 }
 
-// /* ===== Full-viewport Matrix overlay ===== */
-// body { position: relative; }
-
-// /* Mixin for overlay */
-// @mixin tovie-matrix-overlay {
-//   content: "01𝛑λϟ△§¥⚙︎☿⟡01𝛑λϟ△§¥⚙︎☿⟡";
-//   position: fixed;
-//   inset: -12% -6%;
-//   z-index: 0;
-//   pointer-events: none;
-//   opacity: var(--matrix-density);
-//   color: var(--accent-2);
-//   font: 1.05rem/1.12 var(--font-body);
-//   filter: blur(.6px) saturate(120%);
-//   background: repeating-linear-gradient(
-//     180deg,
-//     transparent 0 48px,
-//     color-mix(in hsl, var(--accent-2) 14%, transparent) 48px 49px
-//   );
-//   mix-blend-mode: soft-light;
-//   animation: tovie-matrix var(--matrix-speed) linear infinite;
-//   white-space: pre;
-// }
-
-// /* Show overlay when matrix-enable is present (catch body or wrapper variants) */
-// body.matrix-enable::before,
-// html:has(main.matrix-enable) body::before,
-// html:has(article.matrix-enable) body::before,
-// html:has(main.tovie-cauldron) body::before,
-// html:has(article.tovie-cauldron) body::before {
-//   @include tovie-matrix-overlay;
-// }
-
 /* Ensure content sits above overlay */
-#page, main, article, .content { position: relative; z-index: 1; }
+#page,
+main,
+article,
+.content {
+  position: relative;
+  z-index: 1;
+}
 
 /* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
