@@ -3,15 +3,21 @@
    Drop-in SCSS for src/site/styles/custom-style.scss
    ------------------------------------------------- */
 
-
+/* TEMP debug – remove after verifying */
+// body::after {
+//   content: 'DG-USER-SCSS LOADED';
+//   position: fixed; right: .5rem; bottom: .5rem; z-index: 99999;
+//   padding: .25rem .5rem; font: 12px/1.2 ui-monospace, monospace;
+//   background: #001a; color: #00ffd5; border: 1px solid #00ffd5;
+// }
 
 /* ===== Global defaults (Matrix palette) ===== */
 :root {
   --accent: #39ff14;        /* neon green */
   --accent-2: #00ffd5;      /* aqua/cyan */
-  --bg-1: #1B2124;          /* deep near-black with green tint */
-  --bg-2: #1B2124;          /* pure black */
-  --card-bg: #1B2124;       /* subtle greenish card */
+  --bg-1: #020604;          /* deep near-black with green tint */
+  --bg-2: #000000;          /* pure black */
+  --card-bg: #0a0f0c;       /* subtle greenish card */
   --text-color: #d7ffe8;    /* soft mint text */
 
   --font-body: JetBrainsMonoNL, ui-monospace, Menlo, Consolas, "Liberation Mono", monospace;
@@ -21,10 +27,10 @@
   --blur: 8px;
   --spacing: 12px;
 
-  /* Overlay defaults */
-  --matrix-density: .18;
-  --matrix-speed: 40s;
-}
+//   /* Overlay defaults */
+//   --matrix-density: .18;
+//   --matrix-speed: 40s;
+// }
 
 /* If DG “Apply Style Settings” wrote vars on body, map them in (still Matrix by default) */
 body.css-settings-manager {
@@ -40,8 +46,8 @@ body.css-settings-manager {
   --glow: var(--tovie-cauldron-style-glow, var(--glow));
   --blur: var(--tovie-cauldron-style-blur, var(--blur));
   --spacing: var(--tovie-cauldron-style-spacing, var(--spacing));
-  --matrix-density: var(--tovie-cauldron-style-matrix-density, var(--matrix-density));
-  --matrix-speed: var(--tovie-cauldron-style-matrix-speed, var(--matrix-speed));
+  // --matrix-density: var(--tovie-cauldron-style-matrix-density, var(--matrix-density));
+  // --matrix-speed: var(--tovie-cauldron-style-matrix-speed, var(--matrix-speed));
 }
 
 /* Scope hits wherever DG puts your class */
@@ -60,6 +66,9 @@ $tovie-scope: 'body.tovie-cauldron, main.tovie-cauldron, article.tovie-cauldron,
     linear-gradient(180deg, var(--bg-1), var(--bg-2)) !important;
 
   .markdown-preview-sizer { max-width: var(--max-width); }
+
+    background-color: var(--bg-1) !important;
+
 
   h1, h2, h3 {
     letter-spacing: .015em;
@@ -120,47 +129,47 @@ body.tovie-text-glow {
   }
 }
 
-/* ===== Full-viewport Matrix overlay ===== */
-body { position: relative; }
+// /* ===== Full-viewport Matrix overlay ===== */
+// body { position: relative; }
 
-/* Mixin for overlay */
-@mixin tovie-matrix-overlay {
-  content: "01𝛑λϟ△§¥⚙︎☿⟡01𝛑λϟ△§¥⚙︎☿⟡";
-  position: fixed;
-  inset: -12% -6%;
-  z-index: 0;
-  pointer-events: none;
-  opacity: var(--matrix-density);
-  color: var(--accent-2);
-  font: 1.05rem/1.12 var(--font-body);
-  filter: blur(.6px) saturate(120%);
-  background: repeating-linear-gradient(
-    180deg,
-    transparent 0 48px,
-    color-mix(in hsl, var(--accent-2) 14%, transparent) 48px 49px
-  );
-  mix-blend-mode: soft-light;
-  animation: tovie-matrix var(--matrix-speed) linear infinite;
-  white-space: pre;
-}
+// /* Mixin for overlay */
+// @mixin tovie-matrix-overlay {
+//   content: "01𝛑λϟ△§¥⚙︎☿⟡01𝛑λϟ△§¥⚙︎☿⟡";
+//   position: fixed;
+//   inset: -12% -6%;
+//   z-index: 0;
+//   pointer-events: none;
+//   opacity: var(--matrix-density);
+//   color: var(--accent-2);
+//   font: 1.05rem/1.12 var(--font-body);
+//   filter: blur(.6px) saturate(120%);
+//   background: repeating-linear-gradient(
+//     180deg,
+//     transparent 0 48px,
+//     color-mix(in hsl, var(--accent-2) 14%, transparent) 48px 49px
+//   );
+//   mix-blend-mode: soft-light;
+//   animation: tovie-matrix var(--matrix-speed) linear infinite;
+//   white-space: pre;
+// }
 
-/* Show overlay when matrix-enable is present (catch body or wrapper variants) */
-body.matrix-enable::before,
-html:has(main.matrix-enable) body::before,
-html:has(article.matrix-enable) body::before,
-html:has(main.tovie-cauldron) body::before,
-html:has(article.tovie-cauldron) body::before {
-  @include tovie-matrix-overlay;
-}
+// /* Show overlay when matrix-enable is present (catch body or wrapper variants) */
+// body.matrix-enable::before,
+// html:has(main.matrix-enable) body::before,
+// html:has(article.matrix-enable) body::before,
+// html:has(main.tovie-cauldron) body::before,
+// html:has(article.tovie-cauldron) body::before {
+//   @include tovie-matrix-overlay;
+// }
 
 /* Ensure content sits above overlay */
 #page, main, article, .content { position: relative; z-index: 1; }
 
 /* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  body.matrix-enable::before,
-  html:has(main.matrix-enable) body::before,
-  html:has(article.matrix-enable) body::before,
+  // body.matrix-enable::before,
+  // html:has(main.matrix-enable) body::before,
+  // html:has(article.matrix-enable) body::before,
   html:has(main.tovie-cauldron) body::before,
   html:has(article.tovie-cauldron) body::before {
     animation: none !important;
@@ -168,26 +177,26 @@ html:has(article.tovie-cauldron) body::before {
   }
 }
 
-/* Keyframes */
-@keyframes tovie-matrix {
-  from { transform: translateY(-10%); }
-  to   { transform: translateY(10%); }
-}
+// /* Keyframes */
+// @keyframes tovie-matrix {
+//   from { transform: translateY(-10%); }
+//   to   { transform: translateY(10%); }
+// }
 
 /* ===== Matrix preset helper (optional extra class) ===== */
-body.matrix-preset {
-  /* re-assert palette on body if you like toggling presets later */
-  --accent: #39ff14;
-  --accent-2: #00ffd5;
-  --bg-1: #1B2124;
-  --bg-2: #1B2124;
-  --card-bg: #1B2124;
-  --text-color: #d7ffe8;
+// body.matrix-preset {
+//   /* re-assert palette on body if you like toggling presets later */
+//   --accent: #39ff14;
+//   --accent-2: #00ffd5;
+//   --bg-1: #020604;
+//   --bg-2: #000;
+//   --card-bg: #0a0f0c;
+//   --text-color: #d7ffe8;
 
-  background: linear-gradient(180deg, var(--bg-1), var(--bg-2)) !important;
+//   background: linear-gradient(180deg, var(--bg-1), var(--bg-2)) !important;
 
-  /* soften opaque theme blocks so overlay peeks through */
-  .content, main, article {
-    background-color: color-mix(in hsl, var(--bg-1) 85%, transparent) !important;
-  }
-}
+//   /* soften opaque theme blocks so overlay peeks through */
+//   .content, main, article {
+//     background-color: color-mix(in hsl, var(--bg-1) 85%, transparent) !important;
+//   }
+// }
