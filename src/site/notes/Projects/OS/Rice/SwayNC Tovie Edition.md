@@ -42,7 +42,7 @@ If it squeaks, I exorcise it. 🧹
 
 ## Chapter II — Forging the Sixth Sigil (Workspaces for 3 Screens) 🗿
 
-Two monitors are civilized. Three are **mythic**. I etched a sixth workspace into Waybar so each screen could claim its own altar. 🖥️🖥️🖥️
+Two monitors are civilized. Three are **mythic**. I etched a sixth workspace into Waybar so each screen could claim its own altars. 🖥️🖥️🖥️
 
 
 
@@ -78,7 +78,7 @@ Six thrones, six crowns. The desktop finally **felt** like a command bridge, not
 
 ## Chapter III — Teaching Waybar to Wink (Notifications on the Right) 👁️
 
-The default network widget? Cute. But I wanted a **red-dot omen** when messages arrived—like a familiar tapping the window. 🔴🕊️
+The default network widget? Cute, but i use ethernet anyways. I wanted a **red-dot omen** when messages arrived—like a familiar tapping the window. 🔴🕊️
 
 
 `modules-right` now includes my custom SwayNC herald:
