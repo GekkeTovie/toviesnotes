@@ -137,3 +137,87 @@ body.matrix-enable {
   from { transform: translateY(-10%); }
   to   { transform: translateY(10%); }
 }
+
+/* ========== MATRIX PRESET (green/cyan) ========== */
+/* Add class "matrix-preset" to the site (front-matter: dg-content-classes: "tovie-cauldron matrix-enable matrix-preset") */
+body.matrix-preset {
+  --accent: #39ff14;       /* neon green */
+  --accent-2: #00ffd5;     /* aqua */
+  --bg-1: #020604;         /* deep near-black with green tint */
+  --bg-2: #000000;
+  --card-bg: #0a0f0c;      /* subtle greenish card */
+  --text-color: #d7ffe8;   /* soft mint text */
+}
+
+/* So the page uses the darker bg when we're in matrix preset */
+body.matrix-preset {
+  background: linear-gradient(180deg, var(--bg-1), var(--bg-2)) !important;
+}
+
+/* Optional: soften theme blocks that are fully opaque so the matrix can peek through */
+body.matrix-preset .content,
+body.matrix-preset main,
+body.matrix-preset article {
+  background-color: color-mix(in hsl, var(--bg-1) 85%, transparent) !important;
+}
+
+/* ========== FULL-VIEWPORT MATRIX OVERLAY ========== */
+/* Works if the class is on <body>, or if DG puts the class on the note container. 
+   The :has() selector catches the latter and still paints on <body>. */
+body { position: relative; }
+
+/* Mixin-style block for the overlay rules */
+@mixin tovie-matrix-overlay {
+  content: "01𝛑λϟ△§¥⚙︎☿⟡01𝛑λϟ△§¥⚙︎☿⟡";
+  position: fixed;
+  inset: -12% -6%;               /* bleed beyond viewport */
+  z-index: 0;
+  pointer-events: none;
+  opacity: var(--matrix-density, .18);
+  color: var(--accent-2);
+  font: 1.05rem/1.12 var(--font-body);
+  filter: blur(.6px) saturate(120%);
+  background: repeating-linear-gradient(
+    180deg,
+    transparent 0 48px,
+    color-mix(in hsl, var(--accent-2) 12%, transparent) 48px 49px
+  );
+  mix-blend-mode: soft-light;
+  animation: tovie-matrix var(--matrix-speed, 40s) linear infinite;
+  white-space: pre;
+}
+
+/* Show matrix when:
+   - body has matrix-enable, OR
+   - the main/article wrapper has matrix-enable/tovie-cauldron (DG sometimes puts classes there) */
+body.matrix-enable::before,
+html:has(main.matrix-enable) body::before,
+html:has(article.matrix-enable) body::before,
+html:has(main.tovie-cauldron) body::before,
+html:has(article.tovie-cauldron) body::before {
+  @include tovie-matrix-overlay;
+}
+
+/* Make sure real content sits above the overlay */
+#page, main, article, .content {
+  position: relative;
+  z-index: 1;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  body.matrix-enable::before,
+  html:has(main.matrix-enable) body::before,
+  html:has(article.matrix-enable) body::before,
+  html:has(main.tovie-cauldron) body::before,
+  html:has(article.tovie-cauldron) body::before {
+    animation: none !important;
+    opacity: calc(var(--matrix-density, .18) * .6);
+  }
+}
+
+/* Existing keyframes */
+@keyframes tovie-matrix {
+  from { transform: translateY(-10%); }
+  to   { transform: translateY(10%); }
+}
