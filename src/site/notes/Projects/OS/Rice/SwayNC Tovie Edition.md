@@ -1,12 +1,14 @@
 ---
-{"dg-publish":true,"permalink":"/projects/os/rice/sway-nc-tovie-edition/","title":"🧪 Tovie’s Note Cauldron","contentClasses":"tovie-cauldron matrix-enable matrix-preset","noteIcon":""}
+{"dg-publish":true,"permalink":"/projects/os/rice/sway-nc-tovie-edition/","title":"🔔SwayNC Tovie Edition","contentClasses":"tovie-cauldron matrix-enable matrix-preset","noteIcon":""}
 ---
 
-# Summoning SwayNC: a Triple-Monitor Tale from the Hyprland Underworld 🔮
+# : a Triple-Monitor Tale from the Hyprland Underworld 🔮
 
 ## *This could be better he said. It'll be done in a jiffy he said... (insert 1 week later meme here)*
 
 There I was, staring into the cold, unblinking eye of Wayland, clutching a lukewarm coffee and a handful of dotfiles like tarot cards. ☕🃏 Mako had been my messenger sprite for a while—loyal, but… minimal. I wanted a proper **notification grimoire**. Something with presence. Something with flair. Enter **SwayNC**, draped in a Hyprstellar cloak, with fonts sharp enough to shave pixels and colors whispered from my wallpaper like a prophecy. ✨🧙‍♂️
+
+
 
 This is the chronicle of how I kicked Mako off the summoning circle, carved a **sixth** workspace rune for the third monitor, taught Waybar a new trick, and stitched the whole thing together with **pywal** and a couple of deliciously cursed fonts. 🪄🧵
 
@@ -15,6 +17,7 @@ This is the chronicle of how I kicked Mako off the summoning circle, carved a **
 ## Chapter I — Replacing the Sprite (Mako → SwayNC) 🐉
 
 Mako’s tiny bells fell quiet. In `~/.config/hypr/autostart.conf` I pulled the velvet rope:
+
 
 ```ini
 # Retire the old herald
@@ -26,10 +29,12 @@ exec-once = swaync
 
 And because some spirits just don’t know when to leave:
 
+
 ```bash
 pkill -f mako || true
 grep -Rin "mako" ~/.config ~/.local/share /etc/xdg 2>/dev/null
 ```
+
 
 If it squeaks, I exorcise it. 🧹
 
@@ -39,7 +44,11 @@ If it squeaks, I exorcise it. 🧹
 
 Two monitors are civilized. Three are **mythic**. I etched a sixth workspace into Waybar so each screen could claim its own altar. 🖥️🖥️🖥️
 
+
+
 `~/.config/waybar/config`:
+
+
 
 ```json
 "hyprland/workspaces": {
@@ -59,15 +68,22 @@ Two monitors are civilized. Three are **mythic**. I etched a sixth workspace int
 },
 ```
 
+
+
 Six thrones, six crowns. The desktop finally **felt** like a command bridge, not a folding chair. 👑
 
+
 ---
+
 
 ## Chapter III — Teaching Waybar to Wink (Notifications on the Right) 👁️
 
 The default network widget? Cute. But I wanted a **red-dot omen** when messages arrived—like a familiar tapping the window. 🔴🕊️
 
+
 `modules-right` now includes my custom SwayNC herald:
+
+
 
 ```json
 "modules-right": [
@@ -80,7 +96,9 @@ The default network widget? Cute. But I wanted a **red-dot omen** when messages 
 ]
 ```
 
+
 And the herald itself:
+
 
 ```json
 "custom/notification": {
@@ -102,13 +120,17 @@ And the herald itself:
 }
 ```
 
+
 Now the bar **whispers** when something wants attention, not just coughs politely. 🤫
+
 
 ---
 
 ## Chapter IV — Dressing the Oracle (Hyprstellar, Pywal, and Unreasonably Handsome Fonts) 👗
 
 I borrowed the robe from **Xeji’s Hyprstellar** and realized the magic thread came from **pywal**. No `~/.cache/wal/colors-waybar.css`, no vibes. Also, the fonts. Oh, the fonts. ✍️
+
+
 
 ### The Ritual
 
@@ -134,7 +156,11 @@ mv Ndot55*.ttf ~/.local/share/fonts/
 fc-cache -f -v
 ```
 
+
+
 Then I told pywal to drink in my wallpaper and breathe out a palette:
+
+
 
 ```bash
 wal -i /path/to/your/wallpaper
@@ -142,12 +168,16 @@ wal -i /path/to/your/wallpaper
 
 Waybar’s style pulls the potion here:
 
+
+
 ```css
 /* ~/.config/waybar/style.css (or your theme css) */
 @import '../../.cache/wal/colors-waybar.css';
 ```
 
+
 If your CSS name-drops `DepartureMono Nerd Font`, don’t panic—**DaddyTimeMono** is the glow-up. Keep both in your `font-family` just to flex: 😎
+
 
 ```css
 font-family: "Ndot55Caps","Ndot55","DaddyTimeMono Nerd Font","DepartureMono Nerd Font", monospace;
@@ -159,6 +189,7 @@ font-family: "Ndot55Caps","Ndot55","DaddyTimeMono Nerd Font","DepartureMono Nerd
 
 I checked my sigils:
 
+
 ```bash
 # Fonts present?
 fc-list | grep -i "ndot\|departure\|daddytime"
@@ -167,7 +198,9 @@ fc-list | grep -i "ndot\|departure\|daddytime"
 ls -l ~/.cache/wal/colors-waybar.css
 ```
 
+
 Then I nudged the spirits:
+
 
 ```bash
 # Refresh the oracle
