@@ -133,147 +133,132 @@ settings:
     title: Soft Cards
     description: Turn paragraphs/headings into soft “cards”.
     type: class-toggle
-
 */
 
 /* ---------- Variable scope ---------- */
-body.css-settings-manager {
-  --accent: var(--tovie-cauldron-style-accent);
-  --accent-2: var(--tovie-cauldron-style-accent-2);
-  --bg-1: var(--tovie-cauldron-style-bg-1);
-  --bg-2: var(--tovie-cauldron-style-bg-2);
-  --card-bg: var(--tovie-cauldron-style-card-bg);
-  --text-color: var(--tovie-cauldron-style-text-color);
-  --font-body: var(--tovie-cauldron-style-font-body);
-  --max-width: var(--tovie-cauldron-style-max-width);
-  --radius: var(--tovie-cauldron-style-radius);
-  --glow: var(--tovie-cauldron-style-glow);
-  --blur: var(--tovie-cauldron-style-blur);
-  --spacing: var(--tovie-cauldron-style-spacing);
-  --matrix-density: var(--tovie-cauldron-style-matrix-density);
-  --matrix-speed: var(--tovie-cauldron-style-matrix-speed);
+/* Vars uit Style Settings (optioneel, maar handig als je Apply Style Settings gebruikt) */
+:root, body, body.css-settings-manager {
+  --accent: var(--tovie-cauldron-style-accent, hsl(280,85%,62%));
+  --accent-2: var(--tovie-cauldron-style-accent-2, hsl(190,90%,55%));
+  --bg-1: var(--tovie-cauldron-style-bg-1, hsl(260,40%,10%));
+  --bg-2: var(--tovie-cauldron-style-bg-2, hsl(220,35%,8%));
+  --card-bg: var(--tovie-cauldron-style-card-bg, hsl(250,22%,14%));
+  --text-color: var(--tovie-cauldron-style-text-color, hsl(220,15%,92%));
+  --font-body: var(--tovie-cauldron-style-font-body, JetBrainsMonoNL, ui-monospace, Menlo, Consolas, "Liberation Mono", monospace);
+  --max-width: var(--tovie-cauldron-style-max-width, 48rem);
+  --radius: var(--tovie-cauldron-style-radius, 16px);
+  --glow: var(--tovie-cauldron-style-glow, .6);
+  --blur: var(--tovie-cauldron-style-blur, 8px);
+  --spacing: var(--tovie-cauldron-style-spacing, 12px);
+  --matrix-density: var(--tovie-cauldron-style-matrix-density, .18);
+  --matrix-speed: var(--tovie-cauldron-style-matrix-speed, 40s);
 }
 
-/* ---------- Base styling for notes with cssclass `tovie-cauldron` ---------- */
-.markdown-reading-view .markdown-preview-view.tovie-cauldron,
-.markdown-source-view.mod-cm6 .cm-editor.tovie-cauldron,
-.tovie-cauldron .markdown-preview-sizer {
-  max-width: var(--max-width);
-}
+/* De class kan op body, article, of note-wrapper staan—dek alle varianten af */
+$tovie-scope: 'body.tovie-cauldron, article.tovie-cauldron, .tovie-cauldron, .note-content.tovie-cauldron';
 
-.tovie-cauldron {
-  --local-shadow: 0 0 0.75rem color-mix(in hsl, var(--accent) 60%, transparent);
-  --local-shadow-2: 0 0 1.4rem color-mix(in hsl, var(--accent-2) 50%, transparent);
-}
-
-/* Page background gradient (note-only) */
-body.theme-dark .tovie-cauldron {
+#{$tovie-scope} {
+  position: relative;
+  color: var(--text-color);
+  font-family: var(--font-body);
   background:
     radial-gradient(1200px 800px at 20% -10%, color-mix(in hsl, var(--accent) 10%, transparent), transparent 60%),
     radial-gradient(1000px 700px at 110% 10%, color-mix(in hsl, var(--accent-2) 8%, transparent), transparent 65%),
     linear-gradient(180deg, var(--bg-1), var(--bg-2));
-  color: var(--text-color);
-  font-family: var(--font-body);
+
+  .markdown-preview-sizer { max-width: var(--max-width); }
+
+  h1, h2, h3 {
+    letter-spacing: .015em;
+    line-height: 1.15;
+    margin-block: calc(var(--spacing) * 1.2) calc(var(--spacing) * .4);
+  }
+  h1 {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    text-shadow: 0 0 calc(6px * var(--glow)) color-mix(in hsl, var(--accent) 60%, transparent);
+  }
+  h2 { color: var(--accent); }
+  h3 { color: color-mix(in hsl, var(--accent-2) 80%, var(--text-color)); }
+
+  a {
+    color: var(--accent-2);
+    text-decoration: none;
+    border-bottom: 1px dashed color-mix(in hsl, var(--accent-2) 50%, transparent);
+    &:hover { text-decoration: underline; }
+  }
+
+  pre {
+    border-left: 3px solid color-mix(in hsl, var(--accent) 50%, transparent);
+    code { text-shadow: none !important; }
+  }
+
+  ul li::marker { content: "• "; color: var(--accent); }
+
+  blockquote {
+    border-left: 4px solid color-mix(in hsl, var(--accent) 50%, transparent);
+    padding-left: calc(var(--spacing) * 1.1);
+    color: color-mix(in hsl, var(--text-color) 86%, var(--accent));
+  }
 }
 
-/* Headings */
-.tovie-cauldron h1,
-.tovie-cauldron h2,
-.tovie-cauldron h3 {
-  letter-spacing: 0.015em;
-  line-height: 1.15;
-  margin-block: calc(var(--spacing) * 1.2) calc(var(--spacing) * 0.4);
-}
-.tovie-cauldron h1 {
-  font-size: clamp(2rem, 4vw, 2.8rem);
-  text-shadow: 0 0 calc(6px * var(--glow)) color-mix(in hsl, var(--accent) 60%, transparent);
-}
-.tovie-cauldron h2 { color: var(--accent); }
-.tovie-cauldron h3 { color: color-mix(in hsl, var(--accent-2) 80%, var(--text-color)); }
-
-/* Links */
-.tovie-cauldron a {
-  color: var(--accent-2);
-  text-decoration: none;
-  border-bottom: 1px dashed color-mix(in hsl, var(--accent-2) 50%, transparent);
-}
-.tovie-cauldron a:hover { text-decoration: underline; }
-
-/* Soft card look (toggleable) */
-body.tovie-soft-cards .tovie-cauldron p,
-body.tovie-soft-cards .tovie-cauldron ul,
-body.tovie-soft-cards .tovie-cauldron blockquote,
-body.tovie-soft-cards .tovie-cauldron pre {
-  background: color-mix(in hsl, var(--card-bg) 92%, transparent);
-  border: 1px solid color-mix(in hsl, var(--accent) 18%, transparent);
-  border-radius: var(--radius);
-  padding: calc(var(--spacing) * 0.9) calc(var(--spacing) * 1.1);
-  margin-block: var(--spacing);
-  backdrop-filter: blur(var(--blur));
-  box-shadow: var(--local-shadow);
+/* Soft cards (toggle via Style Settings -> class op body) */
+body.tovie-soft-cards {
+  #{$tovie-scope} {
+    p, ul, blockquote, pre {
+      background: color-mix(in hsl, var(--card-bg) 92%, transparent);
+      border: 1px solid color-mix(in hsl, var(--accent) 18%, transparent);
+      border-radius: var(--radius);
+      padding: calc(var(--spacing) * .9) calc(var(--spacing) * 1.1);
+      margin-block: var(--spacing);
+      backdrop-filter: blur(var(--blur));
+      box-shadow: 0 0 .9rem color-mix(in hsl, var(--accent) 55%, transparent);
+    }
+  }
 }
 
-/* Code blocks */
-.tovie-cauldron pre code {
-  text-shadow: none !important;
-}
-.tovie-cauldron pre {
-  border-left: 3px solid color-mix(in hsl, var(--accent) 50%, transparent);
-}
-
-/* Text glow (toggleable) */
-body.tovie-text-glow .tovie-cauldron h1,
-body.tovie-text-glow .tovie-cauldron h2,
-body.tovie-text-glow .tovie-cauldron a {
-  text-shadow:
-    0 0 calc(8px * var(--glow)) color-mix(in hsl, var(--accent) 55%, transparent),
-    0 0 calc(14px * var(--glow)) color-mix(in hsl, var(--accent-2) 40%, transparent);
+/* Text glow (toggle) */
+body.tovie-text-glow {
+  #{$tovie-scope} {
+    h1, h2, a {
+      text-shadow:
+        0 0 calc(8px * var(--glow)) color-mix(in hsl, var(--accent) 55%, transparent),
+        0 0 calc(14px * var(--glow)) color-mix(in hsl, var(--accent-2) 40%, transparent);
+    }
+  }
 }
 
-/* Lists */
-.tovie-cauldron ul li::marker {
-  content: "• ";
-  color: var(--accent);
+/* Matrix background — toggle via `matrix-enable` (op body) */
+body.matrix-enable {
+  #{$tovie-scope} {
+    overflow: hidden;
+
+    &::before {
+      content: "01𝛑λϟ△§¥⚙︎☿⟡01𝛑λϟ△§¥⚙︎☿⟡";
+      position: absolute;
+      inset: -20% -10% -20% -10%;
+      z-index: 0;
+      pointer-events: none;
+      opacity: var(--matrix-density);
+      font-family: var(--font-body);
+      font-size: 1.1rem;
+      line-height: 1.1;
+      color: var(--accent-2);
+      filter: blur(.6px) saturate(120%);
+      background: repeating-linear-gradient(
+        180deg,
+        transparent 0 48px,
+        color-mix(in hsl, var(--accent-2) 10%, transparent) 48px 49px
+      );
+      mix-blend-mode: soft-light;
+      animation: tovie-matrix var(--matrix-speed) linear infinite;
+      white-space: pre;
+    }
+
+    > * { position: relative; z-index: 1; }
+  }
 }
 
-/* Blockquote */
-.tovie-cauldron blockquote {
-  border-left: 4px solid color-mix(in hsl, var(--accent) 50%, transparent);
-  padding-left: calc(var(--spacing) * 1.1);
-  color: color-mix(in hsl, var(--text-color) 86%, var(--accent));
-}
-
-/* ---------- Matrix background (toggleable with class via Style Settings) ---------- */
-body.matrix-enable .tovie-cauldron {
-  position: relative;
-  overflow: hidden;
-}
-body.matrix-enable .tovie-cauldron::before {
-  content: "01𝛑λϟ△§¥⚙︎☿⟡01𝛑λϟ△§¥⚙︎☿⟡";
-  position: absolute;
-  inset: -20% -10% -20% -10%;
-  pointer-events: none;
-  opacity: var(--matrix-density);
-  font-family: var(--font-body);
-  font-size: 1.1rem;
-  line-height: 1.1;
-  color: var(--accent-2);
-  filter: blur(0.6px) saturate(120%);
-  background: repeating-linear-gradient(
-    180deg,
-    transparent 0 48px,
-    color-mix(in hsl, var(--accent-2) 10%, transparent) 48px 49px
-  );
-  mix-blend-mode: soft-light;
-  animation: tovie-matrix var(--matrix-speed) linear infinite;
-  white-space: pre;
-}
 @keyframes tovie-matrix {
   from { transform: translateY(-10%); }
   to   { transform: translateY(10%); }
 }
-
-/* Ensure matrix sits behind content but on top of page bg */
-.tovie-cauldron { position: relative; }
-body.matrix-enable .tovie-cauldron::before { z-index: 0; }
-body.matrix-enable .tovie-cauldron > * { position: relative; z-index: 1; }
