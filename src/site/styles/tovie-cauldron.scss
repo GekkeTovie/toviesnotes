@@ -1,0 +1,279 @@
+/* @settings
+name: Tovie’s Note Cauldron
+id: tovie-cauldron-style
+settings:
+  - id: heading-core
+    title: Core Settings
+    type: heading
+    level: 2
+    collapsed: false
+
+  - id: accent
+    title: Accent Color (Primary)
+    type: variable-color
+    format: hsl
+    default: 'hsl(280, 85%, 62%)'
+
+  - id: accent-2
+    title: Accent Color (Secondary)
+    type: variable-color
+    format: hsl
+    default: 'hsl(190, 90%, 55%)'
+
+  - id: bg-1
+    title: Background A
+    type: variable-color
+    format: hsl
+    default: 'hsl(260, 40%, 10%)'
+
+  - id: bg-2
+    title: Background B
+    type: variable-color
+    format: hsl
+    default: 'hsl(220, 35%, 8%)'
+
+  - id: card-bg
+    title: Card Background
+    type: variable-color
+    format: hsl
+    default: 'hsl(250, 22%, 14%)'
+
+  - id: text-color
+    title: Text Color
+    type: variable-color
+    format: hsl
+    default: 'hsl(220, 15%, 92%)'
+
+  - id: font-body
+    title: Body Font
+    type: variable-text
+    default: JetBrainsMonoNL, ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace
+
+  - id: max-width
+    title: Content Max Width
+    type: variable-number
+    default: 48
+    format: rem
+
+  - id: radius
+    title: Card Radius
+    type: variable-number-slider
+    default: 16
+    min: 4
+    max: 32
+    step: 1
+    format: px
+
+  - id: glow
+    title: Glow Intensity
+    type: variable-number-slider
+    default: 0.6
+    min: 0
+    max: 1.5
+    step: 0.05
+
+  - id: blur
+    title: Card Backdrop Blur
+    type: variable-number-slider
+    default: 8
+    min: 0
+    max: 20
+    step: 1
+    format: px
+
+  - id: spacing
+    title: Block Spacing
+    type: variable-number-slider
+    default: 12
+    min: 6
+    max: 28
+    step: 1
+    format: px
+
+  - id: matrix
+    title: Matrix Background
+    type: heading
+    level: 3
+    collapsed: false
+
+  - id: matrix-enable
+    title: Enable Matrix Background
+    description: Adds a subtle animated matrix-runes layer behind content (only on notes with cssclass `tovie-cauldron`).
+    type: class-toggle
+
+  - id: matrix-density
+    title: Matrix Density
+    type: variable-number-slider
+    default: 0.12
+    min: 0.04
+    max: 0.30
+    step: 0.01
+
+  - id: matrix-speed
+    title: Matrix Scroll Speed
+    type: variable-number-slider
+    default: 50
+    min: 10
+    max: 120
+    step: 1
+    format: s
+
+  - id: fun
+    title: Fun Toggles
+    type: heading
+    level: 3
+    collapsed: true
+
+  - id: tovie-text-glow
+    title: Text Glow
+    description: Adds a soft neon edge to headings and links.
+    type: class-toggle
+
+  - id: tovie-soft-cards
+    title: Soft Cards
+    description: Turn paragraphs/headings into soft “cards”.
+    type: class-toggle
+
+*/
+
+/* ---------- Variable scope ---------- */
+body.css-settings-manager {
+  --accent: var(--tovie-cauldron-style-accent);
+  --accent-2: var(--tovie-cauldron-style-accent-2);
+  --bg-1: var(--tovie-cauldron-style-bg-1);
+  --bg-2: var(--tovie-cauldron-style-bg-2);
+  --card-bg: var(--tovie-cauldron-style-card-bg);
+  --text-color: var(--tovie-cauldron-style-text-color);
+  --font-body: var(--tovie-cauldron-style-font-body);
+  --max-width: var(--tovie-cauldron-style-max-width);
+  --radius: var(--tovie-cauldron-style-radius);
+  --glow: var(--tovie-cauldron-style-glow);
+  --blur: var(--tovie-cauldron-style-blur);
+  --spacing: var(--tovie-cauldron-style-spacing);
+  --matrix-density: var(--tovie-cauldron-style-matrix-density);
+  --matrix-speed: var(--tovie-cauldron-style-matrix-speed);
+}
+
+/* ---------- Base styling for notes with cssclass `tovie-cauldron` ---------- */
+.markdown-reading-view .markdown-preview-view.tovie-cauldron,
+.markdown-source-view.mod-cm6 .cm-editor.tovie-cauldron,
+.tovie-cauldron .markdown-preview-sizer {
+  max-width: var(--max-width);
+}
+
+.tovie-cauldron {
+  --local-shadow: 0 0 0.75rem color-mix(in hsl, var(--accent) 60%, transparent);
+  --local-shadow-2: 0 0 1.4rem color-mix(in hsl, var(--accent-2) 50%, transparent);
+}
+
+/* Page background gradient (note-only) */
+body.theme-dark .tovie-cauldron {
+  background:
+    radial-gradient(1200px 800px at 20% -10%, color-mix(in hsl, var(--accent) 10%, transparent), transparent 60%),
+    radial-gradient(1000px 700px at 110% 10%, color-mix(in hsl, var(--accent-2) 8%, transparent), transparent 65%),
+    linear-gradient(180deg, var(--bg-1), var(--bg-2));
+  color: var(--text-color);
+  font-family: var(--font-body);
+}
+
+/* Headings */
+.tovie-cauldron h1,
+.tovie-cauldron h2,
+.tovie-cauldron h3 {
+  letter-spacing: 0.015em;
+  line-height: 1.15;
+  margin-block: calc(var(--spacing) * 1.2) calc(var(--spacing) * 0.4);
+}
+.tovie-cauldron h1 {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  text-shadow: 0 0 calc(6px * var(--glow)) color-mix(in hsl, var(--accent) 60%, transparent);
+}
+.tovie-cauldron h2 { color: var(--accent); }
+.tovie-cauldron h3 { color: color-mix(in hsl, var(--accent-2) 80%, var(--text-color)); }
+
+/* Links */
+.tovie-cauldron a {
+  color: var(--accent-2);
+  text-decoration: none;
+  border-bottom: 1px dashed color-mix(in hsl, var(--accent-2) 50%, transparent);
+}
+.tovie-cauldron a:hover { text-decoration: underline; }
+
+/* Soft card look (toggleable) */
+body.tovie-soft-cards .tovie-cauldron p,
+body.tovie-soft-cards .tovie-cauldron ul,
+body.tovie-soft-cards .tovie-cauldron blockquote,
+body.tovie-soft-cards .tovie-cauldron pre {
+  background: color-mix(in hsl, var(--card-bg) 92%, transparent);
+  border: 1px solid color-mix(in hsl, var(--accent) 18%, transparent);
+  border-radius: var(--radius);
+  padding: calc(var(--spacing) * 0.9) calc(var(--spacing) * 1.1);
+  margin-block: var(--spacing);
+  backdrop-filter: blur(var(--blur));
+  box-shadow: var(--local-shadow);
+}
+
+/* Code blocks */
+.tovie-cauldron pre code {
+  text-shadow: none !important;
+}
+.tovie-cauldron pre {
+  border-left: 3px solid color-mix(in hsl, var(--accent) 50%, transparent);
+}
+
+/* Text glow (toggleable) */
+body.tovie-text-glow .tovie-cauldron h1,
+body.tovie-text-glow .tovie-cauldron h2,
+body.tovie-text-glow .tovie-cauldron a {
+  text-shadow:
+    0 0 calc(8px * var(--glow)) color-mix(in hsl, var(--accent) 55%, transparent),
+    0 0 calc(14px * var(--glow)) color-mix(in hsl, var(--accent-2) 40%, transparent);
+}
+
+/* Lists */
+.tovie-cauldron ul li::marker {
+  content: "• ";
+  color: var(--accent);
+}
+
+/* Blockquote */
+.tovie-cauldron blockquote {
+  border-left: 4px solid color-mix(in hsl, var(--accent) 50%, transparent);
+  padding-left: calc(var(--spacing) * 1.1);
+  color: color-mix(in hsl, var(--text-color) 86%, var(--accent));
+}
+
+/* ---------- Matrix background (toggleable with class via Style Settings) ---------- */
+body.matrix-enable .tovie-cauldron {
+  position: relative;
+  overflow: hidden;
+}
+body.matrix-enable .tovie-cauldron::before {
+  content: "01𝛑λϟ△§¥⚙︎☿⟡01𝛑λϟ△§¥⚙︎☿⟡";
+  position: absolute;
+  inset: -20% -10% -20% -10%;
+  pointer-events: none;
+  opacity: var(--matrix-density);
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  line-height: 1.1;
+  color: var(--accent-2);
+  filter: blur(0.6px) saturate(120%);
+  background: repeating-linear-gradient(
+    180deg,
+    transparent 0 48px,
+    color-mix(in hsl, var(--accent-2) 10%, transparent) 48px 49px
+  );
+  mix-blend-mode: soft-light;
+  animation: tovie-matrix var(--matrix-speed) linear infinite;
+  white-space: pre;
+}
+@keyframes tovie-matrix {
+  from { transform: translateY(-10%); }
+  to   { transform: translateY(10%); }
+}
+
+/* Ensure matrix sits behind content but on top of page bg */
+.tovie-cauldron { position: relative; }
+body.matrix-enable .tovie-cauldron::before { z-index: 0; }
+body.matrix-enable .tovie-cauldron > * { position: relative; z-index: 1; }
