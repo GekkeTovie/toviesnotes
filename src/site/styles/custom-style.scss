@@ -55,6 +55,10 @@ body.css-settings-manager {
   --font-sans: var(--font-body) !important;
   --font-serif: var(--font-body) !important;
   --font-mono: var(--font-body) !important;
+  --font-ui: var(--font-body) !important;
+  --font-title: var(--font-body) !important;
+  --font-heading: var(--font-body) !important;
+  --font-default: var(--font-body) !important;
   // --matrix-density: var(--tovie-cauldron-style-matrix-density, var(--matrix-density));
   // --matrix-speed: var(--tovie-cauldron-style-matrix-speed, var(--matrix-speed));
 }
@@ -181,6 +185,63 @@ article,
     opacity: calc(var(--matrix-density) * .6);
   }
 }
+
+header,
+header *,
+.site-header,
+.site-header *,
+.navbar,
+.navbar *,
+.top-nav,
+.top-nav *,
+.site-name,
+.site-title,
+.navbar-brand,
+.navbar-brand *,
+.page-header,
+.page-header *,
+.logo,
+.logo * {
+  font-family: var(--font-body) !important;
+}
+
+/* Some themes set a *different* font on the title element specifically */
+h1.site-title,
+h1.page-title,
+.page-title,
+.header-title,
+.site-name a,
+.site-title a {
+  font-family: var(--font-body) !important;
+  font-weight: 700; /* tweak if you like */
+}
+
+/* 2) File tree / sidebar navigation */
+aside,
+aside *,
+.sidebar,
+.sidebar *,
+.left-sidebar,
+.left-sidebar *,
+.right-sidebar,
+.right-sidebar *,
+.nav-tree,
+.nav-tree *,
+.file-tree,
+.file-tree *,
+.tree,
+.tree *,
+.docs-nav,
+.docs-nav *,
+.page-list,
+.page-list *,
+.folder,
+.folder *,
+.nav,
+.nav * {
+  font-family: var(--font-body) !important;
+}
+
 
 // /* Keyframes */
 // @keyframes tovie-matrix {
