@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"dg-permalink":"/","permalink":"/","title":"🧪 Tovie’s Note Cauldron","tags":["gardenEntry"]}
+{"dg-publish":true,"dg-permalink":"/","permalink":"/","title":"🧪 Tovie’s Note Cauldron","contentClasses":"tovie-cauldron matrix-enable","tags":["gardenEntry"]}
 ---
 
 
