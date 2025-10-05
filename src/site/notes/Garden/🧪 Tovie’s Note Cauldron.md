@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/garden/tovie-s-note-cauldron/","tags":["gardenEntry"]}
+{"dg-publish":true,"dg-permalink":"/","permalink":"/","title":"🧪 Tovie’s Note Cauldron","tags":["gardenEntry"]}
 ---
 
 # 🧪 Tovie’s Note Cauldron
