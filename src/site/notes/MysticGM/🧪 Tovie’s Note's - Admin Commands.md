@@ -6,7 +6,6 @@
 
 _Fast guild hygiene, announcements, and staff XP levers. Keep the cauldron tidy, keep the spells sharp._
 
----
 --- 
 ## ✨ What is this?
 - High-impact admin rituals: purge, slowmode, promote/demote.
