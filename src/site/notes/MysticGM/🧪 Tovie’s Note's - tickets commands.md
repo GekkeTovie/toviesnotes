@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/mystic-gm/tovie-s-note-s-tickets-commands/","noteIcon":""}
+{"dg-publish":true,"permalink":"/mystic-gm/tovie-s-note-s-tickets-commands/","contentClasses":"tovie-cauldron matrix-enable matrix-preset","noteIcon":""}
 ---
 
 # 🎫 MysticGM – Tickets Playbook

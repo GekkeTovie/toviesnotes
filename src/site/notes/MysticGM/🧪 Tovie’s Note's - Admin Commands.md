@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/mystic-gm/tovie-s-note-s-admin-commands/","noteIcon":""}
+{"dg-publish":true,"permalink":"/mystic-gm/tovie-s-note-s-admin-commands/","contentClasses":"tovie-cauldron matrix-enable matrix-preset","noteIcon":""}
 ---
 
 # 🧪 MysticGM – Admin Grimoire

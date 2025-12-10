@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/mystic-gm/tovie-s-note-s-general-commands/","noteIcon":""}
+{"dg-publish":true,"permalink":"/mystic-gm/tovie-s-note-s-general-commands/","contentClasses":"tovie-cauldron matrix-enable matrix-preset","noteIcon":""}
 ---
 
 # 🧭 MysticGM – General Toolkit
