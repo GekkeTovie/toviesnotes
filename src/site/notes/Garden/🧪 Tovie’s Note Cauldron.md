@@ -95,7 +95,7 @@ pip install -U pip wheel
 
 ## 🧪 Latest Brew (Placeholder)
 
--  Omarchy keybind compendium
+-  [[Projects/OS/Rice/SwayNC Tovie Edition\|SwayNC Tovie Edition]] (A guide on my adventures installing a notification manager)
     
 -  Hyprland opacity cookbook (no blur, just vibes)
     
