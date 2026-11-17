@@ -2,7 +2,7 @@ require("dotenv").config();
 const { globSync } = require("glob");
 
 module.exports = async (data) => {
-  let baseUrl = process.env.SITE_BASE_URL || "";
+  let baseUrl = (process.env.SITE_BASE_URL || "https://toviesnotes.vercel.app").replace(/\/+$/, "");
   if (baseUrl && !baseUrl.startsWith("http")) {
     baseUrl = "https://" + baseUrl;
   }

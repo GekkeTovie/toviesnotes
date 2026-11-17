@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/mystic-gm/tovie-s-note-s-moderation-commands/","contentClasses":"tovie-cauldron matrix-enable matrix-preset","noteIcon":""}
+{"dg-publish":true,"permalink":"/mystic-gm/tovie-s-note-s-moderation-commands/","contentClasses":"tovie-cauldron matrix-enable matrix-preset","noteIcon":"","title":"MysticGM – Moderation Field Guide"}
 ---
 
 # 🛡️ MysticGM – Moderation Field Guide

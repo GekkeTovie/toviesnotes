@@ -1,79 +1,79 @@
+{%- set ui = noteUi[locale] -%}
 <!DOCTYPE html>
-<html lang="{{ meta.mainLanguage }}">
+<html lang="{{ locale }}">
   <head>
-    <title>{% if title %}{{ title }}{% else %}{{ page.fileSlug }}{% endif %}</title>
-    {%include "components/pageheader.njk"%}
-    {% for imp in dynamics.common.head %}
-      {% include imp %}
-    {% endfor %}
-    {% for imp in dynamics.index.head %}
-      {% include imp %}
-    {% endfor %}
+    {% include "components/toviesnotes/head.njk" %}
+    <title>Tovie’s Note Cauldron</title>
+    <meta name="description" content="{{ ui.introDescription }}">
   </head>
-  <body class="theme-{{meta.baseTheme}} markdown-preview-view markdown-rendered markdown-preview-section {{meta.bodyClasses}}">
-    {%include "components/notegrowthhistory.njk"%}
-    {% if settings.dgShowFileTree !== true %}
-      {%include "components/navbar.njk"%}
-    {%else%}
-      {%include "components/filetree.njk"%}
-    {% endif %}
-    {% if settings.dgEnableSearch === true %}
-      {%include "components/searchContainer.njk"%}
-    {% endif %}
-    <main class="content cm-s-obsidian {{contentClasses}}">
-      <header>
-      {% if settings.dgShowInlineTitle === true %}
-        <h1>{{ noteTitle  }}</h1>
-      {% endif %}
+  <body class="theme-dark cauldron-site">
+    {% include "components/toviesnotes/header.njk" %}
+    {% set notes = collections.note | sort(false, false, 'data.homeOrder') %}
+    <main class="cauldron-shell cauldron-home" id="main" tabindex="-1">
+      <section class="cauldron-hero" aria-labelledby="home-title">
+        <div class="cauldron-intro">
+          <h1 id="home-title">Tovie’s Note<br><em>Cauldron</em></h1>
+          <div>{{ content | hideDataview | taggify | link | safe }}</div>
+          <a class="cauldron-primary" href="#uitgelicht">{{ ui.readCases }} <span aria-hidden="true">↓</span></a>
+        </div>
+        <div class="cauldron-feature">
+          <span class="cauldron-kicker"><span aria-hidden="true">●</span> {{ ui.research }}</span>
+          <p class="cauldron-feature-count">{{ ui.count }} <span aria-hidden="true">→</span><span class="visually-hidden"> {{ ui.to }} </span> 2</p>
+          <p class="cauldron-feature-caption">{{ ui.countCaption }}</p>
+          <a href="{{ ui.caseUrl }}">{{ ui.caseLink }} <span aria-hidden="true">↗</span></a>
+        </div>
+      </section>
 
-      <div class="header-meta">
-        {% if settings.dgShowTags === true and tags %}
-          <div class="header-tags">
-            {% for tag in tags %}
-              {% if tag != 'gardenEntry' and tag !='note' %}
-                <a class="tag" onclick="toggleTagSearch(this)">
-                  #{{tag}}
-                </a>
-              {% endif %}
-            {% endfor %}
-          </div>
-        {% endif %}
-      </div>
-      {% for imp in dynamics.common.header %}
-        {% include imp %}
-      {% endfor %}
-      {% for imp in dynamics.index.header %}
-        {% include imp %}
-      {% endfor %}
-      </header>
-      {% for imp in dynamics.common.beforeContent %}
-        {% include imp %}
-      {% endfor %}
-      {% for imp in dynamics.index.beforeContent %}
-        {% include imp %}
-      {% endfor %}
-      {{ content | hideDataview | taggify | link | safe}}
-      {% for imp in dynamics.common.afterContent %}
-        {% include imp %}
-      {% endfor %}
-      {% for imp in dynamics.index.afterContent %}
-        {% include imp %}
-      {% endfor %}
+      <section class="cauldron-section" aria-labelledby="uitgelicht">
+        <h2 id="uitgelicht">{{ ui.featured }}</h2>
+        <div class="cauldron-cards">
+          {% for post in notes %}
+            {% if post.data.featured and post.data.locale == locale %}
+              <article class="cauldron-card">
+                {% for topic in noteTopics %}
+                  {% if topic.id == post.data.topic %}<p class="cauldron-kicker">{{ topic.label[locale] }}</p>{% endif %}
+                {% endfor %}
+                <h3><a href="{{ post.url }}">{{ post.data.title }}</a></h3>
+                <p>{{ post.data.summary }}</p>
+                <time datetime="{{ post.data.researchDate }}">{{ post.data.researchLabel }}</time>
+              </article>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </section>
+
+      <section class="cauldron-section" aria-labelledby="onderwerpen">
+        <h2 id="onderwerpen">{{ ui.topics }}</h2>
+        <div class="cauldron-topics">
+          {% for topic in noteTopics %}
+            <section aria-labelledby="{{ topic.id }}">
+              <h3 id="{{ topic.id }}">{{ topic.label[locale] }}</h3>
+              <ul>
+                {% for post in notes %}
+                  {% if post.data.topic == topic.id and (post.data.locale == locale or not post.data.alternateUrl) %}
+                    <li><a href="{{ post.url }}"{% if post.data.locale != locale %} lang="{{ post.data.locale }}"{% endif %}>{{ post.data.title }}</a></li>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            </section>
+          {% endfor %}
+        </div>
+      </section>
+
+      <section class="cauldron-section cauldron-reference" aria-labelledby="referentie">
+        <div>
+          <h2 id="referentie">{{ ui.reference }}</h2>
+          <p>{{ ui.referenceIntro }}</p>
+        </div>
+        <ul lang="en">
+          {% for post in collections.note %}
+            {% if '/mystic-gm/' in post.url %}
+              <li><a href="{{ post.url }}">{{ post.fileSlug | replace('🧪 Tovie’s Note\'s - ', '') | capitalize | replace('Mysticgm', 'MysticGM') }}</a></li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </section>
     </main>
-
-    {% if settings.dgShowBacklinks === true or settings.dgShowLocalGraph === true or settings.dgShowToc === true%}
-      {%include "components/sidebar.njk" %}
-    {%endif%}
-
-    {% if settings.dgLinkPreview === true %}
-      {%include "components/linkPreview.njk"%}
-    {% endif %}
-    {% for imp in dynamics.common.footer %}
-      {% include imp %}
-    {% endfor %}
-    {% for imp in dynamics.index.footer %}
-      {% include imp %}
-    {% endfor %}
-    {%include "components/lucideIcons.njk"%}
-    </body>
-  </html>
+    {% include "components/toviesnotes/footer.njk" %}
+  </body>
+</html>

@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/mystic-gm/tovie-s-note-s-fun-commands/","contentClasses":"tovie-cauldron matrix-enable matrix-preset","noteIcon":""}
+{"dg-publish":true,"permalink":"/mystic-gm/tovie-s-note-s-fun-commands/","contentClasses":"tovie-cauldron matrix-enable matrix-preset","noteIcon":"","title":"MysticGM – Fun Deck"}
 ---
 
 # 🎉 MysticGM – Fun Deck

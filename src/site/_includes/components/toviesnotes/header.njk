@@ -1,0 +1,41 @@
+<a class="skip-link" href="#main">{{ ui.skip }}</a>
+<header class="cauldron-topbar">
+  <div class="cauldron-shell cauldron-topbar-inner">
+    <a class="cauldron-brand" href="{{ ui.home }}">
+      <span class="cauldron-mark" aria-hidden="true">✦</span>
+      ToviesNotes
+    </a>
+    <nav aria-label="{{ ui.navigation }}">
+      <a href="{{ ui.home }}#onderwerpen">{{ ui.topics }}</a>
+      <a href="{{ ui.home }}#referentie">{{ ui.reference }}</a>
+    </nav>
+    <div class="cauldron-actions">
+      {% if alternateUrl %}
+        {% if locale == 'en' %}
+          <a class="cauldron-language" href="{{ alternateUrl }}?lang=nl" lang="nl" hreflang="nl">Nederlands</a>
+        {% else %}
+          <a class="cauldron-language" href="{{ alternateUrl }}?lang=en" lang="en" hreflang="en">English</a>
+        {% endif %}
+      {% endif %}
+      {% if settings.dgEnableSearch === true %}
+        <button type="button" class="cauldron-search" id="search-open" aria-haspopup="dialog" aria-controls="cauldron-search-dialog">
+          <span class="cauldron-search-icon" aria-hidden="true"></span>
+          <span>{{ ui.search }}</span>
+          <kbd class="search-keys">Ctrl K</kbd>
+        </button>
+      {% endif %}
+    </div>
+  </div>
+</header>
+{% if settings.dgEnableSearch === true %}
+  <dialog class="cauldron-search-dialog" id="cauldron-search-dialog" aria-labelledby="search-label" data-empty-message="{{ ui.searchEmpty }}" data-error-message="{{ ui.searchError }}">
+    <div class="cauldron-search-top">
+      <label id="search-label" for="search-query">{{ ui.searchLabel }}</label>
+      <button type="button" id="search-close" aria-label="{{ ui.searchClose }}">×</button>
+    </div>
+    <input type="search" id="search-query" placeholder="{{ ui.searchPlaceholder }}" autocomplete="off" autofocus>
+    <p id="search-status" role="status"></p>
+    <ul id="search-matches"></ul>
+  </dialog>
+  <script defer src="/scripts/cauldron-search.js"></script>
+{% endif %}

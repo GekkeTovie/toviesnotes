@@ -324,7 +324,8 @@ module.exports = function (eleventyConfig) {
     );
   });
 
-  eleventyConfig.addTransform("dataview-js-links", function (str) {
+  eleventyConfig.addTransform("dataview-js-links", function (str, outputPath) {
+    if (!outputPath?.endsWith(".html")) return str;
     const parsed = parse(str);
     for (const dataViewJsLink of parsed.querySelectorAll("a[data-href].internal-link")) {
       const notePath = dataViewJsLink.getAttribute("data-href");
@@ -339,7 +340,8 @@ module.exports = function (eleventyConfig) {
     return str && parsed.innerHTML;
   });
 
-  eleventyConfig.addTransform("callout-block", function (str) {
+  eleventyConfig.addTransform("callout-block", function (str, outputPath) {
+    if (!outputPath?.endsWith(".html")) return str;
     const parsed = parse(str);
 
     const transformCalloutBlocks = (
@@ -444,7 +446,8 @@ module.exports = function (eleventyConfig) {
   }
 
 
-  eleventyConfig.addTransform("picture", function (str) {
+  eleventyConfig.addTransform("picture", function (str, outputPath) {
+    if (!outputPath?.endsWith(".html")) return str;
     if(process.env.USE_FULL_RESOLUTION_IMAGES === "true"){
       return str;
     }
@@ -475,9 +478,10 @@ module.exports = function (eleventyConfig) {
     return str && parsed.innerHTML;
   });
 
-  eleventyConfig.addTransform("table", function (str) {
+  eleventyConfig.addTransform("table", function (str, outputPath) {
+    if (!outputPath?.endsWith(".html")) return str;
     const parsed = parse(str);
-    for (const t of parsed.querySelectorAll(".cm-s-obsidian > table")) {
+    for (const t of parsed.querySelectorAll(".cm-s-obsidian > table, .cauldron-prose > table")) {
       let inner = t.innerHTML;
       t.tagName = "div";
       t.classList.add("table-wrapper");
@@ -522,6 +526,7 @@ module.exports = function (eleventyConfig) {
   });
 
   eleventyConfig.addPassthroughCopy("src/site/img");
+  eleventyConfig.addPassthroughCopy({ "src/site/favicon.svg": "favicon.svg" });
   eleventyConfig.addPassthroughCopy("src/site/scripts");
   eleventyConfig.addPassthroughCopy("src/site/styles/_theme.*.css");
   eleventyConfig.addPlugin(faviconsPlugin, { outputDir: "dist" });
@@ -550,6 +555,14 @@ module.exports = function (eleventyConfig) {
       return variable.replaceAll("\\", "\\\\");
     }
     return variable;
+  });
+
+  eleventyConfig.addFilter("splitNoteHeading", function (content) {
+    const parsed = parse(content);
+    const heading = parsed.querySelector("h1");
+    if (!heading) return { heading: "", body: content };
+    heading.remove();
+    return { heading: heading.outerHTML, body: parsed.innerHTML };
   });
 
   eleventyConfig.addPlugin(pluginRss, {

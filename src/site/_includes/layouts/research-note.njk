@@ -1,0 +1,52 @@
+{%- set ui = noteUi[locale] -%}
+{%- set sectionAnchor = '#referentie' if referenceNote else '#onderwerpen' -%}
+{%- set sectionTitle = ui.reference if referenceNote else ui.topics -%}
+{%- set noteContent = (content | splitNoteHeading) if referenceNote else { body: content } -%}
+<!DOCTYPE html>
+<html lang="{{ locale }}">
+  <head>
+    {% include "components/toviesnotes/head.njk" %}
+    <title>{{ title }} · ToviesNotes</title>
+    {% if summary %}<meta name="description" content="{{ summary }}">{% endif %}
+  </head>
+  <body class="theme-dark cauldron-site">
+    {% include "components/toviesnotes/header.njk" %}
+    <main class="cauldron-shell cauldron-article" id="main" tabindex="-1">
+      <div class="cauldron-article-heading">
+        <a class="cauldron-breadcrumb" href="{{ ui.home }}{{ sectionAnchor }}"><span aria-hidden="true">←</span> {{ sectionTitle }}</a>
+        {% if referenceNote %}
+          {% if noteContent.heading %}{{ noteContent.heading | safe }}{% else %}<h1>{{ title }}</h1>{% endif %}
+        {% else %}
+          <p class="cauldron-kicker">
+            {% for entry in noteTopics %}
+              {% if entry.id == topic %}{{ entry.label[locale] }}{% endif %}
+            {% endfor %}
+            {% if researchDate %}<span aria-hidden="true">/</span> {{ ui.researchedOn }} <time datetime="{{ researchDate }}">{{ researchLabel }}</time>{% endif %}
+          </p>
+          <h1>{{ title }}</h1>
+          <p class="cauldron-deck">{{ summary }}</p>
+        {% endif %}
+      </div>
+      {% set tocHtml = noteContent.body and (noteContent.body | toc) %}
+      <div class="cauldron-reading-layout">
+        {% if tocHtml %}
+          <nav class="cauldron-toc" aria-label="{{ ui.contents }}">
+            <details class="cauldron-toc-mobile">
+              <summary>{{ ui.contents }}</summary>
+              {{ tocHtml | safe }}
+            </details>
+            <div class="cauldron-toc-desktop">
+              <p>{{ ui.contents }}</p>
+              {{ tocHtml | safe }}
+            </div>
+          </nav>
+        {% endif %}
+        <article class="cauldron-prose">
+          {{ noteContent.body | hideDataview | taggify | link | safe }}
+          <p class="cauldron-return"><a href="{{ ui.home }}{{ sectionAnchor }}"><span aria-hidden="true">←</span> {{ ui.reference if referenceNote else ui.allTopics }}</a></p>
+        </article>
+      </div>
+    </main>
+    {% include "components/toviesnotes/footer.njk" %}
+  </body>
+</html>

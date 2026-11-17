@@ -1,0 +1,7 @@
+[
+  { "id": "ricing", "label": { "nl": "Ricing & Customization", "en": "Ricing & Customization" } },
+  { "id": "modding", "label": { "nl": "Modding & Games", "en": "Modding & Games" } },
+  { "id": "reverse-engineering", "label": { "nl": "Reverse Engineering", "en": "Reverse Engineering" } },
+  { "id": "web", "label": { "nl": "TovieIT & Web", "en": "TovieIT & Web" } },
+  { "id": "local-ai", "label": { "nl": "Lokale AI & Automatisering", "en": "Local AI & Automation" } }
+]

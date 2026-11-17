@@ -6,8 +6,11 @@ const allSettings = settings.ALL_NOTE_SETTINGS;
 module.exports = {
   eleventyComputed: {
     layout: (data) => {
-      if (data.tags.indexOf("gardenEntry") != -1) {
+      if (data.tags.includes("gardenEntry") || data.tags.includes("gardenEntryTranslation")) {
         return "layouts/index.njk";
+      }
+      if (data.referenceNote || (data.topic && data.summary)) {
+        return "layouts/research-note.njk";
       }
       return "layouts/note.njk";
     },

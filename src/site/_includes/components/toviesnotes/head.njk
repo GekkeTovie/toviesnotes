@@ -1,0 +1,15 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/styles/user/cauldron.css">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate" href="/feed.xml" type="application/atom+xml" title="ToviesNotes">
+{% if page.url and page.url != '/404/' %}
+  <link rel="canonical" href="{{ meta.siteBaseUrl }}{{ page.url }}">
+{% endif %}
+{% if alternateUrl %}
+  {% set otherLocale = 'nl' if locale == 'en' else 'en' %}
+  <link rel="alternate" hreflang="{{ locale }}" href="{{ meta.siteBaseUrl }}{{ page.url }}">
+  <link rel="alternate" hreflang="{{ otherLocale }}" href="{{ meta.siteBaseUrl }}{{ alternateUrl }}">
+  <meta name="toviesnotes-translation" content="{{ alternateUrl }}">
+  <script src="/scripts/cauldron-language.js"></script>
+{% endif %}
